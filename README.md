@@ -4,7 +4,7 @@ iOS 核心动画学习笔记
 ---
 ##1.图层树
 ###1.1.图层与视图
-	在iOS当中，所有的视图都从一个叫做UIVIew的基类派生而来，UIView可以处理触摸事件，可以支持基于Core Graphics绘图，可以做仿射变换（例如旋转或者缩放），或者简单的类似于滑动或者渐变的动画。
+  在`iOS`当中，所有的视图都从一个叫做`UIVIew`的基类派生而来，`UIView`可以处理触摸事件，可以支持基于`Core Graphics`绘图，可以做仿射变换（例如旋转或者缩放），或者简单的类似于滑动或者渐变的动画。
 	
 ```CALayer```类在概念上和```UIView```类似，同样也是一些被层级关系树管理的矩形块，同样也可以包含一些内容（像图片，文本或者背景色），管理子图层的位置。它们有一些方法和属性用来做动画和变换。和```UIView```最大的不同是```CALayer``` ***不处理用户的交互***。
 
@@ -20,7 +20,7 @@ iOS 核心动画学习笔记
  * 多级非线性动画
  
 ###1.3.使用图层
-清单1.1 给视图添加一个蓝色子图层
+给视图添加一个蓝色子图层
 
 ```	
 	//create sublayer
@@ -32,25 +32,27 @@ iOS 核心动画学习笔记
     
 ```
 ###1.4.总结
-	这一章阐述了图层的树状结构，说明了如何在iOS中由UIView的层级关系形成的一种平行的CALayer层级关系，在后面的实验中，我们创建了自己的CALayer，并把它添加到图层树中。
+这一章阐述了图层的树状结构，说明了如何在iOS中由`UIView`的层级关系形成的一种平行的`CALayer`层级关系，在后面的实验中，我们创建了自己的`CALayer`，并把它添加到图层树中。
 	
 ===
 ##寄宿图
 ###2.1.contents属性
+
 ```CALayer```有个```contents```的属性，这个属性是id类型的，也就是说可以***添加图片***等任何对象。
 
-```
-//load an image
-UIImage *image = [UIImage imageNamed:@"Snowman.png"];
 
-//add it directly to our view's layer
-self.layerView.layer.contents = (__bridge id)image.CGImage;
+	//load an image
+	UIImage *image = [UIImage imageNamed:@"Snowman.png"];
 
-```
+	//add it directly to our view's layer
+	self.layerView.layer.contents = (__bridge id)image.CGImage;
 
 ####2.1.2.contentsGravity
+
 如果图片有点变形，```CALayer```与`contentMode`对应的属性叫做`contentsGravity`，但是它是一个NSString类型，而不是像对应的UIKit部分，那里面的值是枚举。
+
 `self.layerView.layer.contentsGravity = kCAGravityResizeAspect;`
+
 
 ####2.1.3.contentsScale
 `contentsScale`属性定义了寄宿图的像素尺寸和视图大小的比例，默认情况下它是一个值为1.0的浮点数。
@@ -72,9 +74,9 @@ self.layerView.layer.contents = (__bridge id)image.CGImage;
 `UIView`有一个叫做`clipsToBounds`的属性可以用来决定是否显示超出边界的内容，`CALayer`对应的属性叫做`masksToBounds`，把它设置为YES，雪人就在边界里啦～
 
 ####2.1.5.contentsRect
-	CALayer的contentsRect属性允许我们在图层边框里显示寄宿图的一个子域。这涉及到图片是如何显示和拉伸的，所以要比contentsGravity灵活多了1
+`CALayer`的`contentsRect`属性允许我们在图层边框里显示寄宿图的一个子域。这涉及到图片是如何显示和拉伸的，所以要比`contentsGravity`灵活多了
 
-	和bounds，frame不同，contentsRect不是按点来计算的，它使用了单位坐标，单位坐标指定在0到1之间，是一个相对值（像素和点就是绝对值）。所以他们是相对与寄宿图的尺寸的。
+和`bounds`，`frame`不同，`contentsRect`不是按点来计算的，它使用了单位坐标，单位坐标指定在0到1之间，是一个相对值（像素和点就是绝对值）。所以他们是相对与寄宿图的尺寸的。
 
 ```
 @interface ViewController ()
@@ -111,6 +113,7 @@ self.layerView.layer.contents = (__bridge id)image.CGImage;
   [self addSpriteImage:image withContentRect:CGRectMake(0.5, 0.5, 0.5, 0.5) toLayer:self.shipView.layer];
 }
 @end
+
 ```
 	
 	
