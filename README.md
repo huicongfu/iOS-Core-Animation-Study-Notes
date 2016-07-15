@@ -38,7 +38,8 @@ iOS 核心动画学习笔记
 ##寄宿图
 ###2.1.contents属性
 
-```CALayer```有个```contents```的属性，这个属性是id类型的，也就是说可以***添加图片***等任何对象。
+
+`CALayer`有个`contents`的属性，这个属性是id类型的，也就是说可以***添加图片***等任何对象。
 
 ```
 //load an image
@@ -62,8 +63,8 @@ self.layerView.layer.contents = (__bridge id)image.CGImage;
 
 `contentsScale`的目的并不是那么明显。它并不是总会对屏幕上的寄宿图有影响。如果你尝试对我们的例子设置不同的值，你就会发现根本没任何影响。因为`contents`由于设置了`contentsGravity`属性，所以它已经被拉伸以适应图层的边界。
 
-```
 
+```
 	//load an image
 	UIImage *image = [UIImage imageNamed:@"Snowman.png"]; //add it directly to our view's layer
 	self.layerView.layer.contents = (__bridge id)image.CGImage; //center the image
