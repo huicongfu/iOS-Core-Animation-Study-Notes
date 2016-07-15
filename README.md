@@ -40,12 +40,15 @@ iOS 核心动画学习笔记
 
 ```CALayer```有个```contents```的属性，这个属性是id类型的，也就是说可以***添加图片***等任何对象。
 
+```
+//load an image
+UIImage *image = [UIImage imageNamed:@"Snowman.png"];
 
-	//load an image
-	UIImage *image = [UIImage imageNamed:@"Snowman.png"];
+//add it directly to our view's layer
+self.layerView.layer.contents = (__bridge id)image.CGImage;
 
-	//add it directly to our view's layer
-	self.layerView.layer.contents = (__bridge id)image.CGImage;
+```
+
 
 ####2.1.2.contentsGravity
 
@@ -59,19 +62,23 @@ iOS 核心动画学习笔记
 
 `contentsScale`的目的并不是那么明显。它并不是总会对屏幕上的寄宿图有影响。如果你尝试对我们的例子设置不同的值，你就会发现根本没任何影响。因为`contents`由于设置了`contentsGravity`属性，所以它已经被拉伸以适应图层的边界。
 
+```
+
 	//load an image
 	UIImage *image = [UIImage imageNamed:@"Snowman.png"]; //add it directly to our view's layer
 	self.layerView.layer.contents = (__bridge id)image.CGImage; //center the image
 	self.layerView.layer.contentsGravity = kCAGravityCenter; //这个值并不会拉伸图片
 	//set the contentsScale to match image
 	self.layerView.layer.contentsScale = image.scale;
-	
+```
 	
 当用代码的方式来处理寄宿图的时候，一定要记住要手动的设置图层的`contentsScale`属性，否则，你的图片在Retina设备上就显示得不正确啦。代码如下：
 `layer.contentsScale = [UIScreen mainScreen].scale;`
 
+
 ####2.1.4.maskToBounds
 `UIView`有一个叫做`clipsToBounds`的属性可以用来决定是否显示超出边界的内容，`CALayer`对应的属性叫做`masksToBounds`，把它设置为YES，雪人就在边界里啦～
+
 
 ####2.1.5.contentsRect
 `CALayer`的`contentsRect`属性允许我们在图层边框里显示寄宿图的一个子域。这涉及到图片是如何显示和拉伸的，所以要比`contentsGravity`灵活多了
@@ -88,6 +95,9 @@ iOS 核心动画学习笔记
 
 @implementation ViewController
 
+```
+
+```
 - (void)addSpriteImage:(UIImage *)image withContentRect:(CGRect)rect ￼toLayer:(CALayer *)layer //set image
 {
   layer.contents = (__bridge id)image.CGImage;
