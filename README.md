@@ -96,9 +96,7 @@ self.layerView.layer.contents = (__bridge id)image.CGImage;
 
 @implementation ViewController
 
-```
 
-```
 - (void)addSpriteImage:(UIImage *)image withContentRect:(CGRect)rect ￼toLayer:(CALayer *)layer //set image
 {
   layer.contents = (__bridge id)image.CGImage;
